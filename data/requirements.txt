@@ -1,4 +1,3 @@
 geopandas
-jupyterlab
 requests
 python-dotenv
