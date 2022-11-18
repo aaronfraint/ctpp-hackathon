@@ -12,3 +12,10 @@ def fips_code_list() -> list:
             else:
                 codes.append(str(x))
     return codes
+
+
+def codes_for_b302203() -> list:
+    """
+    B302203 - Travel time by Means of transportation (Workers 16 years and over)
+    """
+    return [f"B302203_e{num}" for num in range(1, 48, 4)]
