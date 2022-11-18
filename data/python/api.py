@@ -1,10 +1,8 @@
-import os
 import requests
-from dotenv import find_dotenv, load_dotenv
 
-load_dotenv(find_dotenv())
+from env_vars import CTPP_API_KEY
 
-HEADERS = {"x-api-key": os.getenv("CTPP_API_KEY")}
+HEADERS = {"x-api-key": CTPP_API_KEY}
 API_ENDPOINT = "http://ctpp.macrosysrt.com/api/data/2016"
 
 
