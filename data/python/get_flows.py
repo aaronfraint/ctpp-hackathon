@@ -4,10 +4,11 @@ beginning in each state.
 """
 
 import pandas as pd
+from pathlib import Path
 from dataclasses import dataclass
 
 from api import use_api
-from helpers import fips_code_list
+from helpers import fips_code_list, codes_for_b302203
 
 
 @dataclass
@@ -19,17 +20,17 @@ class FlowFromState:
     """
 
     src_state: str
+    topic: str
 
     dest_state: str = "*"
     level: str = "tract"
-    topic: str = "B302203_e1"
     df: pd.DataFrame = None
 
     def __post_init__(self):
         self.df = self.get_tract_flows()
 
     def get_tract_flows(self) -> pd.DataFrame:
-        print("Getting data for state:", self.src_state)
+        print(f"Getting {self.topic} for state: {self.src_state}")
         params = {
             "in": f"state:{self.src_state}",
             "for": f"{self.level}:*",
@@ -41,15 +42,19 @@ class FlowFromState:
         return pd.DataFrame.from_records(response.json()["data"])
 
 
-if __name__ == "__main__":
+def main():
     state_codes = fips_code_list()
+    topic_codes = codes_for_b302203()
 
-    dfs = []
-    for state in state_codes:
-        flow_data = FlowFromState(state)
-        flow_data.df.to_csv(f"./data/flows/from_{state}.csv")
+    for topic in topic_codes:
+        for state in state_codes:
+            output_file = Path(f"./data/files/flows/{topic}_from_{state}.csv")
+            if not output_file.exists():
+                flow_data = FlowFromState(state, topic)
+                flow_data.df.to_csv(output_file)
+            else:
+                print(f"{topic} - {state} already exists")
 
-        dfs.append(flow_data.df)
 
-    merged_df = pd.concat(dfs)
-    merged_df.to_csv(f"./data/flows/from_all_states.csv")
+if __name__ == "__main__":
+    main()
