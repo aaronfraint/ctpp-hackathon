@@ -13,8 +13,8 @@ from helpers import fips_code_list
 @dataclass
 class FlowFromState:
     """
-    For a given origin state, get flow data 
-    from all trips that started in census 
+    For a given origin state, get flow data
+    from all trips that started in census
     tracts within that state.
     """
 

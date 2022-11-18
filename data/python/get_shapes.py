@@ -45,4 +45,4 @@ if __name__ == "__main__":
         print(state)
         data = get_tract_shapes(state)
         gdf = convert_api_data_to_gdf(data)
-        gdf.to_file(f"./data/shapefiles/tiger_2016_{state}.shp")
+        gdf.to_file(f"./data/files/shapefiles_tiger/tiger_2016_{state}.shp")
