@@ -38,8 +38,10 @@ class FlowFromState:
             "d-in": f"state:{self.dest_state}",
             "d-for": f"{self.level}:*",
         }
-        response = use_api(params)
-        return pd.DataFrame.from_records(response.json()["data"])
+        response = use_api(params).json()
+        if "data" not in response:
+            print(response)
+        return pd.DataFrame.from_records(response["data"])
 
 
 def main():
