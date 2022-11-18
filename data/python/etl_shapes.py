@@ -10,6 +10,6 @@ if __name__ == "__main__":
 
     merged_gdf = pd.concat(gdfs)
 
-    print(merged_gdf.shape)
+    merged_gdf.set_crs(epsg=4326, inplace=True)
 
-    merged_gdf.to_file("./data/files/shapefiles_processed/merged_tracts.shp")
+    merged_gdf.to_file("./data/files/processed_data/merged_tracts.shp")
