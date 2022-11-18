@@ -1,0 +1,13 @@
+name: ctpp_hackathon
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9*
+  - requests
+  - geopandas
+  - sqlalchemy
+  - psycopg2
+  - jupyterlab
+  - python-dotenv
+  - black
+  - flake8

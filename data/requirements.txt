@@ -1,3 +1,0 @@
-geopandas
-requests
-python-dotenv
