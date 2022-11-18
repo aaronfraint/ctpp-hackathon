@@ -2,11 +2,20 @@ all:
 	@echo CTPP Hackathon
 	@echo --------------
 	@echo make python-env
-	@echo make data
+	@echo make data-download
+	@echo make data-etl
+	@echo make db-init
 
 python-env:
-	python -m venv env && source env/bin/activate && pip install -r ./data/requirements.txt
+	python -m venv env && source env/bin/activate && pip install -r ./data/requirements.txt && pip install -r ./data/requirements-dev.txt
 
-data:
-	source env/bin/activate && python ./data/get_flows.py
-	source env/bin/activate && python ./data/get_shapes.py
+data-download:
+	./env/bin/python ./data/python/get_flows.py
+	./env/bin/python ./data/python/get_shapes.py
+
+data-etl:
+	./env/bin/python ./data/python/etl_shapes.py
+
+db-init:
+	psql -d postgres -c "create database ctpp_hackathon;" 
+    psql -d ctpp_hackathon -c "create extension postgis;"
