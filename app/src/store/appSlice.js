@@ -6,6 +6,8 @@ const slice = createSlice({
     error: null,
     bottomSheetOpen: false,
     selectedOrigins: [],
+    selectedDestinations: [],
+    activeMode: 'start',
   },
   reducers: {
     setError: (state, action) => {
@@ -16,6 +18,12 @@ const slice = createSlice({
     },
     setSelectedOrigins: (state, action) => {
       state.selectedOrigins = action.payload;
+    },
+    setSelectedDestinations: (state, action) => {
+      state.selectedDestinations = action.payload;
+    },
+    setActiveMode: (state, action) => {
+      state.activeMode = action.payload;
     },
   },
 });
@@ -29,5 +37,13 @@ export const setBottomSheetOpen = (payload) => ({
 });
 export const setSelectedOrigins = (payload) => ({
   type: 'app/setSelectedOrigins',
+  payload,
+});
+export const setSelectedDestinations = (payload) => ({
+  type: 'app/setSelectedDestinations',
+  payload,
+});
+export const setActiveMode = (payload) => ({
+  type: 'app/setActiveMode',
   payload,
 });
